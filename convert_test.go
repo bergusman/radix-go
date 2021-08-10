@@ -57,8 +57,8 @@ func TestConvertBytesEmpty(t *testing.T) {
 }
 
 func TestConvertBytesVsConvert(t *testing.T) {
-	bin := benchBytes(64)
-	iin := benchInts(64)
+	bin := generateBytes(64, 256)
+	iin := generateInts(64, 256)
 
 	rxs := []int{2, 8, 10, 11, 29, 58, 256}
 
@@ -91,7 +91,7 @@ func cmpBytesVsInts(bytes []byte, ints []int) bool {
 }
 
 func BenchmarkConvertExtraSmall(b *testing.B) {
-	input := benchInts(1)
+	input := generateInts(1, 256)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		Convert(input, 256, 58)
@@ -99,7 +99,7 @@ func BenchmarkConvertExtraSmall(b *testing.B) {
 }
 
 func BenchmarkConvertBytesExtraSmall(b *testing.B) {
-	input := benchBytes(1)
+	input := generateBytes(1, 256)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		ConvertBytes(input, 58)
@@ -107,7 +107,7 @@ func BenchmarkConvertBytesExtraSmall(b *testing.B) {
 }
 
 func BenchmarkConvertSmall(b *testing.B) {
-	input := benchInts(20)
+	input := generateInts(20, 256)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		Convert(input, 256, 58)
@@ -115,7 +115,7 @@ func BenchmarkConvertSmall(b *testing.B) {
 }
 
 func BenchmarkConvertBytesSmall(b *testing.B) {
-	input := benchBytes(20)
+	input := generateBytes(20, 256)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		ConvertBytes(input, 58)
@@ -123,7 +123,7 @@ func BenchmarkConvertBytesSmall(b *testing.B) {
 }
 
 func BenchmarkConvertMedium(b *testing.B) {
-	input := benchInts(1024)
+	input := generateInts(1024, 256)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		Convert(input, 256, 58)
@@ -131,7 +131,7 @@ func BenchmarkConvertMedium(b *testing.B) {
 }
 
 func BenchmarkConvertBytesMedium(b *testing.B) {
-	input := benchBytes(1024)
+	input := generateBytes(1024, 256)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		ConvertBytes(input, 58)
@@ -139,7 +139,7 @@ func BenchmarkConvertBytesMedium(b *testing.B) {
 }
 
 func BenchmarkConvertLarge(b *testing.B) {
-	input := benchInts(16 * 1024)
+	input := generateInts(16*1024, 256)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		Convert(input, 256, 58)
@@ -147,25 +147,25 @@ func BenchmarkConvertLarge(b *testing.B) {
 }
 
 func BenchmarkConvertBytesLarge(b *testing.B) {
-	input := benchBytes(16 * 1024)
+	input := generateBytes(16*1024, 256)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		ConvertBytes(input, 58)
 	}
 }
 
-func benchInts(n int) (out []int) {
+func generateInts(n int, rx int) (out []int) {
 	out = make([]int, n)
 	for i := 0; i < n; i++ {
-		out[i] = 255 - i%256
+		out[i] = (rx - 1) - i%rx
 	}
 	return
 }
 
-func benchBytes(n int) (out []byte) {
+func generateBytes(n int, rx int) (out []byte) {
 	out = make([]byte, n)
 	for i := 0; i < n; i++ {
-		out[i] = byte(255 - i%256)
+		out[i] = byte((rx - 1) - i%rx)
 	}
 	return
 }
