@@ -1,2 +1,1 @@
-# radix-go
-Radix conversion
+# Radix (Base) Conversion
