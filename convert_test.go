@@ -1,6 +1,9 @@
 package radix
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestConvertEmpty(t *testing.T) {
 	out, err := Convert(nil, 16, 2)
@@ -17,7 +20,9 @@ func TestConvertErrors(t *testing.T) {
 	if out != nil {
 		t.Error("out must be nil")
 	}
-	if err.Error() != "inrx must be greater then 1" {
+	if err != nil {
+		t.Error("err must be not nil")
+	} else if err.Error() != "inrx must be greater then 1" {
 		t.Error("err must be invalid inrx")
 	}
 
@@ -25,7 +30,9 @@ func TestConvertErrors(t *testing.T) {
 	if out != nil {
 		t.Error("out must be nil")
 	}
-	if err.Error() != "outrx must be greater then 1" {
+	if err != nil {
+		t.Error("err must be not nil")
+	} else if err.Error() != "outrx must be greater then 1" {
 		t.Error("err must be invalid outrx")
 	}
 
@@ -33,7 +40,9 @@ func TestConvertErrors(t *testing.T) {
 	if out != nil {
 		t.Error("out must be nil")
 	}
-	if err.Error() != "in[1]: 2 must be less then inrx: 2" {
+	if err != nil {
+		t.Error("err must be not nil")
+	} else if err.Error() != "in[1]: 2 must be less then inrx: 2" {
 		t.Error("err must be digit is greater then inrx")
 	}
 
@@ -41,7 +50,9 @@ func TestConvertErrors(t *testing.T) {
 	if out != nil {
 		t.Error("out must be nil")
 	}
-	if err.Error() != "in[1]: -1 must be greater or equal 0" {
+	if err != nil {
+		t.Error("err must be not nil")
+	} else if err.Error() != "in[1]: -1 must be greater or equal 0" {
 		t.Error("err must be digit is negative")
 	}
 }
@@ -168,4 +179,42 @@ func generateBytes(n int, rx int) (out []byte) {
 		out[i] = byte((rx - 1) - i%rx)
 	}
 	return
+}
+
+func TestGenerateInts(t *testing.T) {
+	tests := []struct {
+		len   int
+		radix int
+		want  []int
+	}{
+		{len: 1, radix: 10, want: []int{9}},
+		{len: 4, radix: 1000, want: []int{999, 998, 997, 996}},
+		{len: 10, radix: 5, want: []int{4, 3, 2, 1, 0, 4, 3, 2, 1, 0}},
+	}
+
+	for _, test := range tests {
+		res := generateInts(test.len, test.radix)
+		if !reflect.DeepEqual(res, test.want) {
+			t.Errorf("generateInts(1, 10): %v not equal %v", res, test.want)
+		}
+	}
+}
+
+func TestGenerateBytes(t *testing.T) {
+	tests := []struct {
+		len   int
+		radix int
+		want  []byte
+	}{
+		{len: 1, radix: 10, want: []byte{9}},
+		{len: 4, radix: 256, want: []byte{255, 254, 253, 252}},
+		{len: 10, radix: 5, want: []byte{4, 3, 2, 1, 0, 4, 3, 2, 1, 0}},
+	}
+
+	for _, test := range tests {
+		res := generateBytes(test.len, test.radix)
+		if !reflect.DeepEqual(res, test.want) {
+			t.Errorf("generateInts(1, 10): %v not equal %v", res, test.want)
+		}
+	}
 }
