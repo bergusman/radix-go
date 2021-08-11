@@ -22,7 +22,7 @@ func TestConvertErrors(t *testing.T) {
 	}
 	if err != nil {
 		t.Error("err must be not nil")
-	} else if err.Error() != "inrx must be greater then 1" {
+	} else if err.Error() != "inrx must be greater than 1" {
 		t.Error("err must be invalid inrx")
 	}
 
@@ -32,7 +32,7 @@ func TestConvertErrors(t *testing.T) {
 	}
 	if err != nil {
 		t.Error("err must be not nil")
-	} else if err.Error() != "outrx must be greater then 1" {
+	} else if err.Error() != "outrx must be greater than 1" {
 		t.Error("err must be invalid outrx")
 	}
 
@@ -42,8 +42,8 @@ func TestConvertErrors(t *testing.T) {
 	}
 	if err != nil {
 		t.Error("err must be not nil")
-	} else if err.Error() != "in[1]: 2 must be less then inrx: 2" {
-		t.Error("err must be digit is greater then inrx")
+	} else if err.Error() != "in[1]: 2 must be less than inrx: 2" {
+		t.Error("err must be digit is greater than inrx")
 	}
 
 	out, err = Convert([]int{1, -1, 3}, 2, 2)

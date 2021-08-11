@@ -21,7 +21,7 @@ func TestEncodeErrors(t *testing.T) {
 	}
 	if err == nil {
 		t.Error("err must be not nil")
-	} else if err.Error() != "len(alphabet) less then 2" {
-		t.Error("len(alphabet) less then 2")
+	} else if err.Error() != "len(alphabet) less than 2" {
+		t.Error("len(alphabet) less than 2")
 	}
 }

@@ -8,7 +8,7 @@ import (
 func Encode(input []int, alphabet string) (output string, err error) {
 	runes := []rune(alphabet)
 	if len(runes) < 2 {
-		return "", errors.New("len(alphabet) less then 2")
+		return "", errors.New("len(alphabet) less than 2")
 	}
 	if len(input) == 0 {
 		return "", nil
@@ -16,7 +16,7 @@ func Encode(input []int, alphabet string) (output string, err error) {
 
 	for i, v := range input {
 		if v >= len(runes) {
-			return "", fmt.Errorf("input[%v]: %v must be less then len(alphabet): %v", i, v, len(runes))
+			return "", fmt.Errorf("input[%v]: %v must be less than len(alphabet): %v", i, v, len(runes))
 		}
 		output += string(runes[v])
 	}
@@ -26,7 +26,7 @@ func Encode(input []int, alphabet string) (output string, err error) {
 func Decode(input string, alphabet string) (output []int, err error) {
 	runes := []rune(alphabet)
 	if len(runes) < 2 {
-		return nil, errors.New("len(alphabet) less then 2")
+		return nil, errors.New("len(alphabet) less than 2")
 	}
 
 	if input == "" {
@@ -52,7 +52,7 @@ func Decode(input string, alphabet string) (output []int, err error) {
 func EncodeBytes(input []byte, alphabet string) (output string, err error) {
 	runes := []rune(alphabet)
 	if len(runes) < 2 {
-		return "", errors.New("len(alphabet) less then 2")
+		return "", errors.New("len(alphabet) less than 2")
 	}
 	if len(input) == 0 {
 		return "", nil
@@ -60,7 +60,7 @@ func EncodeBytes(input []byte, alphabet string) (output string, err error) {
 
 	for i, v := range input {
 		if int(v) >= len(runes) {
-			return "", fmt.Errorf("input[%v]: %v must be less then len(alphabet): %v", i, v, len(runes))
+			return "", fmt.Errorf("input[%v]: %v must be less than len(alphabet): %v", i, v, len(runes))
 		}
 		output += string(runes[v])
 	}
@@ -70,7 +70,7 @@ func EncodeBytes(input []byte, alphabet string) (output string, err error) {
 func DecodeBytes(input string, alphabet string) (output []byte, err error) {
 	runes := []rune(alphabet)
 	if len(runes) < 2 {
-		return nil, errors.New("len(alphabet) less then 2")
+		return nil, errors.New("len(alphabet) less than 2")
 	}
 
 	if input == "" {
