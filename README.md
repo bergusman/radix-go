@@ -11,11 +11,40 @@ Base58 encoding (used by Bitcoin and others) builds on this conversion of big nu
 ### Examples
 
 ```Go
-```
+package main
 
-Output:
+import (
+	"fmt"
+	"log"
+	
+	"github.com/bergusman/radix-go"
+)
 
-```
+func main() {
+	out, err := radix.Convert([]int{1, 3, 3, 7}, 10, 16)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	str, err := radix.Encode(out, "0123456789ABCDEF")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(str)  // Output: 539
+
+	out, err = radix.Convert([]int{1, 3, 3, 7}, 10, 5)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	str, err = radix.Encode(out, "🌑🌘🌗🌖🌕")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(str)  // Output: 🌗🌑🌖🌗🌗
+}
 ```
 
 #### Base58
