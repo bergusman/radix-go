@@ -1,9 +1,26 @@
 package radix
 
 import (
+	"fmt"
+	"log"
 	"reflect"
 	"testing"
 )
+
+func ExampleEncode() {
+	out, err := Convert([]int{1, 3, 3, 7}, 10, 2)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	str, err := Encode(out, "01")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(str)
+	// Output: 10100111001
+}
 
 type encodingTest struct {
 	decoded  []int

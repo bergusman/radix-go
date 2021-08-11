@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// Encode encodes input to string with alphabet.
 func Encode(input []int, alphabet string) (output string, err error) {
 	runes := []rune(alphabet)
 	if len(runes) < 2 {
@@ -23,6 +24,7 @@ func Encode(input []int, alphabet string) (output string, err error) {
 	return
 }
 
+// Decode decodes input string by alphabet.
 func Decode(input string, alphabet string) (output []int, err error) {
 	runes := []rune(alphabet)
 	if len(runes) < 2 {
@@ -49,6 +51,7 @@ func Decode(input string, alphabet string) (output []int, err error) {
 	return
 }
 
+// EncodeBytes encodes bytes input to string with alphabet.
 func EncodeBytes(input []byte, alphabet string) (output string, err error) {
 	runes := []rune(alphabet)
 	if len(runes) < 2 {
@@ -67,6 +70,7 @@ func EncodeBytes(input []byte, alphabet string) (output string, err error) {
 	return
 }
 
+// DecodeBytes decodes input string by alphabet to bytes output.
 func DecodeBytes(input string, alphabet string) (output []byte, err error) {
 	runes := []rune(alphabet)
 	if len(runes) < 2 {

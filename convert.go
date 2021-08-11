@@ -1,3 +1,5 @@
+// Package radix implements radix conversions for integer sequences ([]byte or []int)
+// and their encoding/deconding to string by specified alphabet.
 package radix
 
 import (
@@ -7,7 +9,7 @@ import (
 	"math/big"
 )
 
-// Convert converts input `in` with radix `inrx` to ouput `out` with radix `outrx`.
+// Convert converts input (int) with radix (inrx) to ouput (out) with radix (outrx).
 func Convert(in []int, inrx int, outrx int) (out []int, err error) {
 	if inrx < 2 {
 		return nil, errors.New("inrx must be greater than 1")
@@ -63,8 +65,8 @@ func Convert(in []int, inrx int, outrx int) (out []int, err error) {
 	return
 }
 
-// ConvertBytes converts `in` bytes (with 256 radix)
-// to `out` bytes with radix `outrx`.
+// ConvertBytes converts input bytes (in) with 256 radix
+// to output bytes (out) with radix (outrx).
 func ConvertBytes(in []byte, outrx int) (out []byte, err error) {
 	if outrx < 2 {
 		return nil, errors.New("outrx must be greater than 1")

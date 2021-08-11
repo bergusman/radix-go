@@ -1,9 +1,21 @@
 package radix
 
 import (
+	"fmt"
+	"log"
 	"reflect"
 	"testing"
 )
+
+func ExampleConvert() {
+	out, err := Convert([]int{1, 3, 3, 7}, 10, 2)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(out)
+	// Output: [1 0 1 0 0 1 1 1 0 0 1]
+}
 
 func TestConvertEmpty(t *testing.T) {
 	out, err := Convert(nil, 16, 2)
