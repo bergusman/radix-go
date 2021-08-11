@@ -13,7 +13,17 @@ Base58 encoding (used by Bitcoin and others) builds on this conversion of big nu
 ```Go
 ```
 
+Output:
+
+```
+```
+
 #### Base58
 
 ```Go
+```
+
+Output:
+
+```
 ```
