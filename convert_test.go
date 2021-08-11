@@ -20,7 +20,7 @@ func TestConvertErrors(t *testing.T) {
 	if out != nil {
 		t.Error("out must be nil")
 	}
-	if err != nil {
+	if err == nil {
 		t.Error("err must be not nil")
 	} else if err.Error() != "inrx must be greater than 1" {
 		t.Error("err must be invalid inrx")
@@ -30,7 +30,7 @@ func TestConvertErrors(t *testing.T) {
 	if out != nil {
 		t.Error("out must be nil")
 	}
-	if err != nil {
+	if err == nil {
 		t.Error("err must be not nil")
 	} else if err.Error() != "outrx must be greater than 1" {
 		t.Error("err must be invalid outrx")
@@ -40,7 +40,7 @@ func TestConvertErrors(t *testing.T) {
 	if out != nil {
 		t.Error("out must be nil")
 	}
-	if err != nil {
+	if err == nil {
 		t.Error("err must be not nil")
 	} else if err.Error() != "in[1]: 2 must be less than inrx: 2" {
 		t.Error("err must be digit is greater than inrx")
@@ -50,7 +50,7 @@ func TestConvertErrors(t *testing.T) {
 	if out != nil {
 		t.Error("out must be nil")
 	}
-	if err != nil {
+	if err == nil {
 		t.Error("err must be not nil")
 	} else if err.Error() != "in[1]: -1 must be greater or equal 0" {
 		t.Error("err must be digit is negative")
@@ -64,6 +64,28 @@ func TestConvertBytesEmpty(t *testing.T) {
 	}
 	if err != nil {
 		t.Error("err must be nil")
+	}
+}
+
+func TestConvertBytesErrors(t *testing.T) {
+	out, err := ConvertBytes(nil, 1)
+	if out != nil {
+		t.Error("out must be nil")
+	}
+	if err == nil {
+		t.Error("err must be not nil")
+	} else if err.Error() != "outrx must be greater than 1" {
+		t.Error("err must be invalid outrx")
+	}
+
+	out, err = ConvertBytes(nil, 257)
+	if out != nil {
+		t.Error("out must be nil")
+	}
+	if err == nil {
+		t.Error("err must be not nil")
+	} else if err.Error() != "outrx must be less than 256" {
+		t.Error("err must be invalid outrx")
 	}
 }
 
