@@ -31,7 +31,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println(str)  // Output: 539
+	fmt.Println(str) // Output: 539
 
 	out, err = radix.Convert([]int{1, 3, 3, 7}, 10, 5)
 	if err != nil {
@@ -43,16 +43,36 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println(str)  // Output: 🌗🌑🌖🌗🌗
+	fmt.Println(str) // Output: 🌗🌑🌖🌗🌗
 }
 ```
 
 #### Base58
 
 ```Go
+package main
+
+import (
+	"encoding/hex"
+	"fmt"
+	"log"
+
+	"github.com/bergusman/radix-go"
+)
+
+func main() {
+	addr, err := hex.DecodeString("8aee40b8e87eb05bc3b9ff902349bb2dd19a5e90")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	str, err := radix.Base58Encode(addr, radix.AlphabetBitcoin)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(str) // Output: 2wG9ewuHafzR4yG2hYu8U3YmpZxb
+}
 ```
 
-Output:
-
-```
-```
+Can check here: http://lenschulwitz.com/base58
